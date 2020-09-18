@@ -2,6 +2,8 @@ const express = require("express");
 const axios = require("axios");
 const app = express();
 
+require("./startup/prod")(app);
+
 app.get("/", (req, res) => {
     res.send("hello api");
 });
@@ -9,6 +11,7 @@ app.get("/", (req, res) => {
 app.get("/api/:name/:numImages/:after", async (req, res) => {
     console.log("get /api/:name");
     let { name, numImages, after } = req.params;
+
     if (after === "undefined") {
         after = undefined;
     }
@@ -98,6 +101,8 @@ app.get("/api/:name/:numImages/:after", async (req, res) => {
     }
 });
 
-app.listen(3000, () => {
-    console.log("listening on port 3000");
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
+    console.log(`listening on port ${port}`);
 });
