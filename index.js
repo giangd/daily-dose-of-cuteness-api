@@ -52,6 +52,9 @@ app.get("/api/:name/:numImages/:after", async (req, res) => {
                 isHeartClicked: false,
             };
 
+            mediaObject.id = `${postObject.data.id}`;
+            mediaObject.redditLink = `${postObject.data.permalink}`;
+
             switch (postHint) {
                 case "rich:video": // gif
                     mediaObject.type = "gif";
